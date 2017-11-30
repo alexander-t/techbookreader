@@ -1,0 +1,14 @@
+{
+    "name": "alexander-t/techbookreader-site",
+    "description": "techbookreader.com site",
+    "type": "project",
+    "require": {
+        "slim/slim": "^3.9"
+    },
+    "authors": [
+        {
+            "name": "Alexander Tarlinder",
+            "email": "alexander@tarlinder.net"
+        }
+    ]
+}
