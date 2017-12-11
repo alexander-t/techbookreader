@@ -11,11 +11,12 @@ class ReviewService {
     }
 
     public function getReviewById($id) {
-        $stmt = $this->pdo->prepare('SELECT id, title, author, publication_year, summary FROM reviews WHERE id = :id');
+        $stmt = $this->pdo->prepare('SELECT id, title, author, publication_year, summary, reviewed, opinion, is_classic FROM reviews WHERE id = :id');
         $stmt->execute(['id' => $id]);
 
         try {
             if ($row = $stmt->fetch()) {
+                $row['is_classic'] = ($row['is_classic'] == 1) ? true : false;
                 return $row;
             }
 
