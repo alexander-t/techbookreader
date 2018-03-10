@@ -10,5 +10,10 @@
             "name": "Alexander Tarlinder",
             "email": "alexander@tarlinder.net"
         }
-    ]
+    ],
+    "autoload": {
+        "psr-4": {
+            "TechbookReader\\": "src/"
+        }
+    }
 }
