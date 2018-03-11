@@ -68,9 +68,10 @@ $app->get('/menu', function (Request $request, Response $response) {
         ['item' => 'Exam Preparation'],
         ['item' => 'Game Development']
         ]],
-        ['menu' => 'Soft Skills Books', 'items' =>
+        ['menu' => 'Soft Skills Books', 'items' => [
         ['item' => 'Leadership']
-        ]];
+        ]]
+    ];
     return $response->withHeader('Content-type', 'application/json')->withJson($menu);
 });    
 
