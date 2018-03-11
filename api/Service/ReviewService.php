@@ -11,7 +11,7 @@ class ReviewService {
     }
 
     public function getReviewById($id) {
-        $stmt = $this->pdo->prepare('SELECT id, title, author, publication_year, summary, reviewed, opinion, is_classic FROM reviews WHERE id = :id');
+        $stmt = $this->pdo->prepare('SELECT ' . $this->allColumns() . ' FROM reviews WHERE id = :id');
         $stmt->execute(['id' => $id]);
 
         try {
@@ -24,5 +24,29 @@ class ReviewService {
         } finally {
             $stmt->closeCursor();
         }
+    }
+
+    public function getReviewsByCategory($category) {
+        $reviews = [];
+        if (empty($category)) {
+            return $reviews;
+        }
+
+        $stmt = $this->pdo->prepare('SELECT ' . $this->allColumns() . ' FROM reviews WHERE category = :category');
+        $stmt->execute(['category' => $category]);
+
+        try {
+            while ($row = $stmt->fetch()) {
+                $row['is_classic'] = ($row['is_classic'] == 1) ? true : false;
+                $reviews[] = $row;;
+            }
+        } finally {
+            $stmt->closeCursor();
+        }
+        return $reviews;
+    }
+
+    private function allColumns() {
+        return "id, title, author, publication_year, summary, reviewed, opinion, is_classic";
     }
 }

@@ -41,6 +41,14 @@ $app->get('/ping', function (Request $request, Response $response) {
     return $response->withHeader('Content-type', 'application/json')->withJson($pong);
 });
 
+$app->get('/review', function (Request $request, Response $response) {
+    if (empty($request->getParam('category'))) {
+        return $response->withStatus(400);
+    }
+    $reviews = $this->reviewService->getReviewsByCategory($request->getParam('category'));
+    return $response->withHeader('Content-type', 'application/json')->withJson($reviews);
+});
+
 $app->get('/review/{id}', function (Request $request, Response $response) {
     $reviewId = $request->getAttribute('id');
     if (!is_numeric($reviewId)) {
