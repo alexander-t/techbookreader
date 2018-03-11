@@ -1,5 +1,5 @@
 function attachMenus(selector) {
-    $.getJSON('https://www.techbookreader.com/beta/api/menu', function (menus) {
+    $.getJSON('https://techbookreader.com/beta/api/menu', function (menus) {
         var menusHtml = '';
         for (m = 0; m < menus.length; m++) {
             var menuHtml = '<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' + menus[m].menu + '</a><div class="dropdown-menu" aria-labelledby="navbarDropdown">';
