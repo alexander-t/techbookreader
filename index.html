@@ -24,45 +24,7 @@
             <li class="nav-item">
                 <a class="nav-link" href="#">About this Site</a>
             </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Technical Books
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">About Technology</a>
-                    <a class="dropdown-item" href="#">Agile</a>
-                    <a class="dropdown-item" href="#">Product Ownership & Requirements</a>
-                    <a class="dropdown-item" href="#">Architecture</a>
-                    <a class="dropdown-item" href="#">Continuous Delivery</a>
-                    <a class="dropdown-item" href="#">Software Engineering</a>
-                    <a class="dropdown-item" href="#">TDD and Testing</a>
-                    <a class="dropdown-item" href="#">Working with Code</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Databases</a>
-                    <a class="dropdown-item" href="#">Tools</a>
-                    <a class="dropdown-item" href="#">The Cloud</a>
-                    <a class="dropdown-item" href="#">Web Development</a>
-                    <a class="dropdown-item" href="#">Microsoft</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Security</a>
-                    <a class="dropdown-item" href="#">Performance</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Java and J2EE</a>
-                    <a class="dropdown-item" href="#">Ruby</a>
-                    <a class="dropdown-item" href="#">.NET</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Exam Preparation</a>
-                    <a class="dropdown-item" href="#">Game Development</a>
-                </div>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Soft Skills Books
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">Leadership</a>
-                </div>
-            </li>
+            <li id="book-menus"></li>
         </ul>
         <form class="form-inline my-2 my-lg-0">
             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
@@ -107,8 +69,13 @@
         </div>
     </div>
 </div>
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+<script src="menu.js"></script>
+<script>$(document).ready(function () {
+    attachMenus('#book-menus');
+});
+</script>
 </body>
 </html>
