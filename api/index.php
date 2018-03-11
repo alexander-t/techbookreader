@@ -12,6 +12,13 @@ $CONFIG['displayErrorDetails'] = false;
 $CONFIG['addContentLengthHeader'] = false;
 
 $app = new \Slim\App(["settings" => $CONFIG]);
+$corsOptions = array(
+    "origin" => "https://www.techbookreader.com",
+    "exposeHeaders" => array("Content-Type", "X-Requested-With", "X-authentication", "X-client"),
+    "allowMethods" => array('GET', 'POST', 'PUT', 'DELETE', 'OPTIONS')
+);
+$app->add(new \CorsSlim\CorsSlim($corsOptions));
+
 $container = $app->getContainer();
 
 $container['pdo'] = function($container) {
