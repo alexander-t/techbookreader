@@ -1,0 +1,8 @@
+<?php
+$CONFIG = [
+	'host' => 'localhost',
+	'db' => 'techbookreader',
+	'user' => 'dev',
+	'password' => 'dev'
+];
+
