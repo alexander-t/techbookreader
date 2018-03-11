@@ -3,7 +3,8 @@
     "description": "techbookreader.com site",
     "type": "project",
     "require": {
-        "slim/slim": "^3.9"
+        "slim/slim": "^3.9",
+	"palanik/corsslim": "dev-slim3"
     },
     "authors": [
         {
