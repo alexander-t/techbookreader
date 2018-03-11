@@ -41,6 +41,39 @@ $app->get('/ping', function (Request $request, Response $response) {
     return $response->withHeader('Content-type', 'application/json')->withJson($pong);
 });
 
+$app->get('/menu', function (Request $request, Response $response) {
+    $menu = [
+        ['menu' => 'Technical Books', 'items' => [
+        ['item' => 'Agile', 'category' => 'agile'],
+        ['item' => 'Product Ownership & Requirements'],
+        ['item' => 'Architecture'],
+        ['item' => 'Continuous Delivery'],
+        ['item' => 'Software Engineering'],
+        ['item' => 'TDD and Testing'],
+        ['item' => 'Working with Code'],
+        ['separator' => true],
+        ['item' => 'Databases'],
+        ['item' => 'Tools'],
+        ['item' => 'The Cloud'],
+        ['item' => 'Web Development'],
+        ['item' => 'Microsoft'],
+        ['separator' => true],
+        ['item' => 'Security'],
+        ['item' => 'Performance'],
+        ['separator' => true],
+        ['item' => 'Java and J2EE'],
+        ['item' => 'Ruby'],
+        ['item' => '.NET'],
+        ['separator' => true],
+        ['item' => 'Exam Preparation'],
+        ['item' => 'Game Development']
+        ]],
+        ['menu' => 'Soft Skills Books', 'items' =>
+        []
+        ]];
+    return $response->withHeader('Content-type', 'application/json')->withJson($menu);
+});    
+
 $app->get('/review', function (Request $request, Response $response) {
     if (empty($request->getParam('category'))) {
         return $response->withStatus(400);
