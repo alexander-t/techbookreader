@@ -34,7 +34,7 @@
 </nav>
 <div class="container">
     <div class="row">
-        <div class="col-12"><a href="#/review/17">Review</a><p id="dyn"></p></div>
+        <div class="col-8"><a href="#/review/17">Review</a><p id="title"></p><p id="summary"></p></div>
     </div>
     <div class="row">
         <div class="col">
@@ -78,7 +78,8 @@
     $(document).ready(function () {
         Router.add('#/review/(\\d+)', function (reviewId) {
             $.getJSON('https://techbookreader.com/beta/api/review/' + reviewId, function (review) {
-                $('#dyn').html(review.title);
+                $('#title').html(review.title);
+                $('#summary').html(review.summary);
             });
         });
         window.onhashchange = Router.update;
