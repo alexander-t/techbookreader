@@ -33,16 +33,16 @@
     </div>
 </nav>
 <div class="container">
-    <div class="row">
+    <div id="review_body" class="row" style="display:none;">
         <div class="col">
         </div>
-        <div class="col-8"><a href="#/review/17">Review</a>
-            <p id="title"></p>
-            <p id="author"></p>
-            <h4>Summary</h4>
-            <p id="summary"></p>
-            <h4>Opinion</h4>
-            <p id="opinion"></p>
+        <div class="col-8">
+            <h3 id="review_title"></h3>
+            <p id="review_author"></p>
+            <h5>Summary</h5>
+            <p id="review_summary"></p>
+            <h5>Opinion</h5>
+            <p id="review_opinion"></p>
         </div>
         <div class="col">
         </div>
@@ -89,10 +89,11 @@
     $(document).ready(function () {
         Router.add('#/review/(\\d+)', function (reviewId) {
             $.getJSON('https://techbookreader.com/beta/api/review/' + reviewId, function (review) {
-                $('#title').text(review.title);
-                $('#author').text('by ' + review.author);
-                $('#summary').html(review.summary);
-                $('#opinion').html(review.opinion);
+                $('#review_body').show();
+                $('#review_title').text(review.title);
+                $('#review_author').text('by ' + review.author);
+                $('#review_summary').html(review.summary);
+                $('#review_opinion').html(review.opinion);
             });
         });
         window.onhashchange = Router.update;
