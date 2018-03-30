@@ -38,8 +38,11 @@
         </div>
         <div class="col-8"><a href="#/review/17">Review</a>
             <p id="title"></p>
-            <h3>Summary</h3>
+            <p id="author"></p>
+            <h4>Summary</h4>
             <p id="summary"></p>
+            <h4>Opinion</h4>
+            <p id="opinion"></p>
         </div>
         <div class="col">
         </div>
@@ -86,8 +89,10 @@
     $(document).ready(function () {
         Router.add('#/review/(\\d+)', function (reviewId) {
             $.getJSON('https://techbookreader.com/beta/api/review/' + reviewId, function (review) {
-                $('#title').html(review.title);
+                $('#title').text(review.title);
+                $('#author').text('by ' + review.author);
                 $('#summary').html(review.summary);
+                $('#opinion').html(review.opinion);
             });
         });
         window.onhashchange = Router.update;
