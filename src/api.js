@@ -1,7 +1,9 @@
 export default function (baseUrl) {
 
+    var API_URL = baseUrl + '/api';
+    
     var showMenu = function (selector) {
-        $.getJSON(baseUrl + '/api/menu', function (menus) {
+        $.getJSON(API_URL + '/menu', function (menus) {
             var menusHtml = '';
             for (var m = 0; m < menus.length; m++) {
                 var menuHtml = '<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' + menus[m].menu + '</a><div class="dropdown-menu" aria-labelledby="navbarDropdown">';
@@ -21,7 +23,7 @@ export default function (baseUrl) {
     };
 
     var showReview = function (reviewId) {
-        $.getJSON(baseUrl + '/api/review/' + reviewId, function (review) {
+        $.getJSON(API_URL + '/reviews/' + reviewId, function (review) {
             $('#review_body').show();
             $('#review_title').text(review.title);
             $('#review_author').text('by ' + review.author);
@@ -31,7 +33,12 @@ export default function (baseUrl) {
     };
 
     var showCategory = function (category) {
-        console.log("->" + category);
+	$.getJSON(API_URL + '/categories?name=' + category, function (reviews) {
+	    $('#review_body').show().empty();
+	    for (var i = 0; i < reviews.length; i++) {
+		$('#review_body').append('<p><a href="' + API_URL + reviews[i].href + '">' + reviews[i].title + '</a></p>');
+	    }
+	});
     };
 
     return {
