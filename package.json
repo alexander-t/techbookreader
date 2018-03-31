@@ -1,0 +1,33 @@
+{
+  "name": "techbookreader",
+  "version": "1.0.0",
+  "description": "",
+  "main": "menu.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack",
+    "start:dev": "webpack-dev-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alexander-t/techbookreader.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alexander-t/techbookreader/issues"
+  },
+  "homepage": "https://github.com/alexander-t/techbookreader#readme",
+  "devDependencies": {
+    "webpack": "^4.4.1",
+    "webpack-cli": "^2.0.13",
+    "webpack-dev-server": "^3.1.1"
+  },
+  "dependencies": {
+    "bootstrap": "^4.0.0",
+    "expose-loader": "^0.7.5",
+    "jquery": "^3.3.1",
+    "popper.js": "^1.14.1"
+  }
+}
