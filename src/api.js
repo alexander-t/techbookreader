@@ -1,6 +1,6 @@
 export default function (baseUrl) {
 
-    var attachMenus = function (selector) {
+    var showMenu = function (selector) {
         $.getJSON(baseUrl + '/api/menu', function (menus) {
             var menusHtml = '';
             for (var m = 0; m < menus.length; m++) {
@@ -20,11 +20,22 @@ export default function (baseUrl) {
         });
     };
 
+    var showReview = function (reviewId) {
+        $.getJSON(baseUrl + '/api/review/' + reviewId, function (review) {
+            $('#review_body').show();
+            $('#review_title').text(review.title);
+            $('#review_author').text('by ' + review.author);
+            $('#review_summary').html(review.summary);
+            $('#review_opinion').html(review.opinion);
+        });
+    };
+
     var logBaseUrl = function() {
         console.log("Base:" + baseUrl);
     };
 
     return {
-        attachMenus: attachMenus
+        showMenu: showMenu,
+        showReview: showReview
     }
 }

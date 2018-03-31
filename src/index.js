@@ -15,17 +15,9 @@ $(document).ready(function () {
 
     var api = API(getBaseUrl());
 
-    Router.add('#/review/(\\d+)', function (reviewId) {
-        $.getJSON(getBaseUrl() + '/api/review/' + reviewId, function (review) {
-            $('#review_body').show();
-            $('#review_title').text(review.title);
-            $('#review_author').text('by ' + review.author);
-            $('#review_summary').html(review.summary);
-            $('#review_opinion').html(review.opinion);
-        });
-    });
+    Router.add('#/review/(\\d+)', api.showReview);
     window.onhashchange = Router.update;
     Router.update();
 
-    api.attachMenus('#book-menus');
+    api.showMenu('#book-menus');
 });
