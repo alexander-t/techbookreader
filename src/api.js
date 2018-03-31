@@ -30,12 +30,13 @@ export default function (baseUrl) {
         });
     };
 
-    var logBaseUrl = function() {
-        console.log("Base:" + baseUrl);
+    var showCategory = function (category) {
+        console.log("->" + category);
     };
 
     return {
         showMenu: showMenu,
-        showReview: showReview
+        showReview: showReview,
+        showCategory: showCategory
     }
 }

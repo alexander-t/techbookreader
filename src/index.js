@@ -1,6 +1,6 @@
 import 'bootstrap';
-import {Router} from './router.js';
-import API from "./api";
+import {Router} from './router';
+import Controller from "./api";
 
 function getBaseUrl() {
     var getUrl = window.location;
@@ -13,11 +13,12 @@ function getBaseUrl() {
 
 $(document).ready(function () {
 
-    var api = API(getBaseUrl());
+    var controller = Controller(getBaseUrl());
 
-    Router.add('#/review/(\\d+)', api.showReview);
+    Router.add('#/review/(\\d+)', controller.showReview);
+    Router.add('#/category/(.*)', controller.showCategory);
     window.onhashchange = Router.update;
     Router.update();
 
-    api.showMenu('#book-menus');
+    controller.showMenu('#book-menus');
 });
