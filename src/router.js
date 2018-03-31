@@ -26,3 +26,5 @@ var Router = (function () {
         update: update
     };
 })();
+
+export {Router};

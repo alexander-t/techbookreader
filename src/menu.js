@@ -17,3 +17,4 @@ function attachMenus(selector) {
         $(selector).replaceWith(menusHtml);
     });
 }
+export {attachMenus};
