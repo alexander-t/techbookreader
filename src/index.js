@@ -1,3 +1,4 @@
+import 'bootstrap';
 import {Router} from './router.js';
 import API from "./api";
 
@@ -15,7 +16,7 @@ $(document).ready(function () {
     var api = API(getBaseUrl());
 
     Router.add('#/review/(\\d+)', function (reviewId) {
-        $.getJSON('https://techbookreader.com/beta/api/review/' + reviewId, function (review) {
+        $.getJSON(getBaseUrl() + '/api/review/' + reviewId, function (review) {
             $('#review_body').show();
             $('#review_title').text(review.title);
             $('#review_author').text('by ' + review.author);
