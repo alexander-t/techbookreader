@@ -1,6 +1,7 @@
 <?php
 
 namespace TechbookReader\Service;
+use PDO;
 
 class ReviewService {
     private $pdo;
@@ -10,6 +11,10 @@ class ReviewService {
         $this->pdo = $pdo;
     }
 
+    public function getCategories() {
+        return $this->pdo->query('SELECT DISTINCT category FROM reviews')->fetchAll(PDO::FETCH_COLUMN);
+    }
+    
     public function getReviewById($id) {
         $stmt = $this->pdo->prepare('SELECT ' . $this->allColumns() . ' FROM reviews WHERE id = :id');
         $stmt->execute(['id' => $id]);

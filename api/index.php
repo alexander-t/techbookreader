@@ -84,6 +84,11 @@ $app->get('/menu', function (Request $request, Response $response) {
     return $response->withHeader('Content-type', 'application/json')->withJson($menu);
 });
 
+$app->get('/categories', function (Request $request, Response $response) {
+    $categories = $this->reviewService->getCategories();
+    return $response->withHeader('Content-type', 'application/json')->withJson($categories);
+});
+
 $app->get('/review', function (Request $request, Response $response) {
     if (empty($request->getParam('category'))) {
         return $response->withStatus(400);
