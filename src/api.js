@@ -24,7 +24,7 @@ export default function (baseUrl) {
 
     let showReview = function (reviewId) {
         $.getJSON(API_URL + '/reviews/' + reviewId, function (review) {
-            $('#review_body').show();
+            $("#container").html($("#template_review").html());
             $('#review_title').text(review.title);
             $('#review_author').text('by ' + review.author);
             $('#review_summary').html(review.summary);
