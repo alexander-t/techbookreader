@@ -71,13 +71,14 @@ $app->get('/menu', function (Request $request, Response $response) {
             ['item' => 'Performance', 'category' => 'performance'],
             ['separator' => true],
             ['item' => 'Java and J2EE', 'category' => 'java'],
+            ['item' => 'JavaScript', 'category' => 'javascript'],
             ['item' => 'Ruby', 'category' => 'ruby'],
             ['item' => '.NET', 'category' => 'dotnet'],
             ['separator' => true],
             ['item' => 'Exam Preparation', 'category' => 'exam_prep'],
             ['item' => 'Game Development', 'category' => 'game_development'],
             ['separator' => true],
-            ['item' => 'Novels & other', 'category' => 'tech_other']
+            ['item' => 'Novels & Other', 'category' => 'tech_other']
         ]],
         ['menu' => 'Soft Skills Books', 'items' => [
             ['item' => 'Leadership', 'category' => 'leadership']
