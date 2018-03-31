@@ -1,7 +1,7 @@
 export default function (baseUrl) {
 
     var API_URL = baseUrl + '/api';
-    
+
     var showMenu = function (selector) {
         $.getJSON(API_URL + '/menu', function (menus) {
             var menusHtml = '';
@@ -10,7 +10,7 @@ export default function (baseUrl) {
                 for (var i = 0; i < menus[m].items.length; i++) {
                     var item = menus[m].items[i];
                     if (item.hasOwnProperty('item')) {
-                        menuHtml += '<a class="dropdown-item" href="#/category/' + item.category +'">' + item.item + '</a>'
+                        menuHtml += '<a class="dropdown-item" href="#/category/' + item.category + '">' + item.item + '</a>'
                     } else if (item.hasOwnProperty("separator")) {
                         menuHtml += '<div class="dropdown-divider"></div>';
                     }
@@ -33,12 +33,12 @@ export default function (baseUrl) {
     };
 
     var showCategory = function (category) {
-	$.getJSON(API_URL + '/categories?name=' + category, function (reviews) {
-	    $('#review_body').show().empty();
-	    for (var i = 0; i < reviews.length; i++) {
-		$('#review_body').append('<p><a href="' + API_URL + reviews[i].href + '">' + reviews[i].title + '</a></p>');
-	    }
-	});
+        $.getJSON(API_URL + '/categories?name=' + category, function (reviews) {
+            $('#review_body').show().empty();
+            for (var i = 0; i < reviews.length; i++) {
+                $('#review_body').append('<p><a href="' + API_URL + reviews[i].href + '">' + reviews[i].title + '</a></p>');
+            }
+        });
     };
 
     return {
