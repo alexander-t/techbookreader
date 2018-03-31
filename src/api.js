@@ -34,9 +34,9 @@ export default function (baseUrl) {
 
     let showCategory = function (category) {
         $.getJSON(API_URL + '/categories?name=' + category, function (reviews) {
-            $('#review_body').show().empty();
+	    $("#container").html($("#template_narrow").html());
             for (let i = 0; i < reviews.length; i++) {
-                $('#review_body').append('<p><a href="' + API_URL + reviews[i].href + '">' + reviews[i].title + '</a></p>');
+                $('#template_body').append('<p><a href="#/review/' + reviews[i].id + '">' + reviews[i].title + '</a></p>');
             }
         });
     };

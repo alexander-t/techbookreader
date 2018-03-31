@@ -12,6 +12,7 @@ var Router = (function () {
             if (match) {
                 match.shift();
                 routes[i].handler.apply({}, match);
+		return;
             }
         }
     };

@@ -15,7 +15,6 @@ $(document).ready(function () {
 
     var controller = Controller(getBaseUrl());
 
-    Router.add('#', function() {$("#container").html($("#template_narrow").html())});
     Router.add('#/review/(\\d+)', controller.showReview);
     Router.add('#/category/(.*)', controller.showCategory);
     window.onhashchange = Router.update;
