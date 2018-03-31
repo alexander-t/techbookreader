@@ -8,7 +8,7 @@ export default function (baseUrl) {
                 for (var i = 0; i < menus[m].items.length; i++) {
                     var item = menus[m].items[i];
                     if (item.hasOwnProperty('item')) {
-                        menuHtml += '<a class="dropdown-item" href="#">' + item.item + '</a>'
+                        menuHtml += '<a class="dropdown-item" href="#/category/' + item.category +'">' + item.item + '</a>'
                     } else if (item.hasOwnProperty("separator")) {
                         menuHtml += '<div class="dropdown-divider"></div>';
                     }
