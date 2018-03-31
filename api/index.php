@@ -85,19 +85,17 @@ $app->get('/menu', function (Request $request, Response $response) {
 });
 
 $app->get('/categories', function (Request $request, Response $response) {
-    $categories = $this->reviewService->getCategories();
-    return $response->withHeader('Content-type', 'application/json')->withJson($categories);
-});
-
-$app->get('/review', function (Request $request, Response $response) {
-    if (empty($request->getParam('category'))) {
-        return $response->withStatus(400);
+    $category = $request->getParam('name'); 
+    if (empty($category)) {
+        $categories = $this->reviewService->getCategories();
+        return $response->withHeader('Content-type', 'application/json')->withJson($categories);
+    } else {
+        $reviewIds = $this->reviewService->getReviewsByCategory($category);
+        return $response->withHeader('Content-type', 'application/json')->withJson($reviewIds);
     }
-    $reviews = $this->reviewService->getReviewsByCategory($request->getParam('category'));
-    return $response->withHeader('Content-type', 'application/json')->withJson($reviews);
 });
 
-$app->get('/review/{id}', function (Request $request, Response $response) {
+$app->get('/reviews/{id}', function (Request $request, Response $response) {
     $reviewId = $request->getAttribute('id');
     if (!is_numeric($reviewId)) {
         return $response->withStatus(400);

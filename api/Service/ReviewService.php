@@ -12,7 +12,19 @@ class ReviewService {
     }
 
     public function getCategories() {
-        return $this->pdo->query('SELECT DISTINCT category FROM reviews')->fetchAll(PDO::FETCH_COLUMN);
+        $categories = [];
+        $query = $this->pdo->query('SELECT DISTINCT category FROM reviews');
+        try {
+            while ($row = $query->fetch()) {
+                $categories[] =
+                    ['name' => $row['category'],
+                    'href' => '/categories?name='. $row['category']];
+            }
+
+            return $categories;
+        } finally {
+            $query->closeCursor();
+        }
     }
     
     public function getReviewById($id) {
@@ -37,18 +49,10 @@ class ReviewService {
             return $reviews;
         }
 
-        $stmt = $this->pdo->prepare('SELECT ' . $this->allColumns() . ' FROM reviews WHERE category = :category');
+        $stmt = $this->pdo->prepare('SELECT id, title FROM reviews WHERE category = :category');
         $stmt->execute(['category' => $category]);
-
-        try {
-            while ($row = $stmt->fetch()) {
-                $row['is_classic'] = ($row['is_classic'] == 1) ? true : false;
-                $reviews[] = $row;;
-            }
-        } finally {
-            $stmt->closeCursor();
-        }
-        return $reviews;
+        $reviews = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return array_map(function($r) {$r['href'] = '/reviews/' . $r[id]; return $r;}, $reviews);
     }
 
     private function allColumns() {
