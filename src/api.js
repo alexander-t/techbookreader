@@ -16,6 +16,7 @@ export default function (baseUrl) {
                 menuHtml += '</div></li>';
                 menusHtml += menuHtml;
             }
+            console.log(menusHtml);
             $(selector).replaceWith(menusHtml);
         });
     };
