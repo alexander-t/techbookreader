@@ -54,38 +54,38 @@ $app->get('/menu', function (Request $request, Response $response) {
     $menu = [
         ['menu' => 'Technical Books', 'items' => [
             ['item' => 'Agile', 'category' => 'agile'],
-            ['item' => 'Product Ownership & Requirements', 'category' =>'product_ownership'],
-            ['item' => 'Architecture', 'category' =>'architecture'],
-            ['item' => 'Continuous Delivery', 'category' =>'continuous_delivery'],
-            ['item' => 'Software Engineering', 'category' =>'sw_engineering'],
-            ['item' => 'TDD and Testing', 'category' =>'testing'],
-            ['item' => 'Working with Code', 'category' =>'code'],
+            ['item' => 'Product Ownership & Requirements', 'category' => 'product_ownership'],
+            ['item' => 'Architecture', 'category' => 'architecture'],
+            ['item' => 'Continuous Delivery', 'category' => 'continuous_delivery'],
+            ['item' => 'Software Engineering', 'category' => 'sw_engineering'],
+            ['item' => 'TDD and Testing', 'category' => 'testing'],
+            ['item' => 'Working with Code', 'category' => 'code'],
             ['separator' => true],
-            ['item' => 'Databases', 'category' =>'databases'],
-            ['item' => 'Tools', 'category' =>'tools'],
-            ['item' => 'The Cloud', 'category' =>'cloud'],
-            ['item' => 'Web Development', 'category' =>'web'],
-            ['item' => 'Microsoft', 'category' =>'microsoft'],
+            ['item' => 'Databases', 'category' => 'databases'],
+            ['item' => 'Tools', 'category' => 'tools'],
+            ['item' => 'The Cloud', 'category' => 'cloud'],
+            ['item' => 'Web Development', 'category' => 'web'],
+            ['item' => 'Microsoft', 'category' => 'microsoft'],
             ['separator' => true],
-            ['item' => 'Security', 'category' =>'security'],
-            ['item' => 'Performance', 'category' =>'performance'],
+            ['item' => 'Security', 'category' => 'security'],
+            ['item' => 'Performance', 'category' => 'performance'],
             ['separator' => true],
-            ['item' => 'Java and J2EE', 'category' =>'java'],
-            ['item' => 'Ruby', 'category' =>'ruby'],
-            ['item' => '.NET', 'category' =>'dotnet'],
+            ['item' => 'Java and J2EE', 'category' => 'java'],
+            ['item' => 'Ruby', 'category' => 'ruby'],
+            ['item' => '.NET', 'category' => 'dotnet'],
             ['separator' => true],
-            ['item' => 'Exam Preparation', 'category' =>'exam_prep'],
-            ['item' => 'Game Development', 'category' =>'game_development']
+            ['item' => 'Exam Preparation', 'category' => 'exam_prep'],
+            ['item' => 'Game Development', 'category' => 'game_development']
         ]],
         ['menu' => 'Soft Skills Books', 'items' => [
-            ['item' => 'Leadership', 'category' =>'leadership']
+            ['item' => 'Leadership', 'category' => 'leadership']
         ]]
     ];
     return $response->withHeader('Content-type', 'application/json')->withJson($menu);
 });
 
 $app->get('/categories', function (Request $request, Response $response) {
-    $category = $request->getParam('name'); 
+    $category = $request->getParam('name');
     if (empty($category)) {
         $categories = $this->reviewService->getCategories();
         return $response->withHeader('Content-type', 'application/json')->withJson($categories);
