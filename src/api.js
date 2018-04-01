@@ -41,9 +41,15 @@ export default function (baseUrl) {
         });
     };
 
+    let navigateByTitle = function(title) {
+        $("#container").html($("#template_narrow").html());
+        $('#template_body').append(title);
+    };
+
     return {
         showMenu: showMenu,
         showReview: showReview,
-        showCategory: showCategory
+        showCategory: showCategory,
+        navigateByTitle: navigateByTitle
     }
 }

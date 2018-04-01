@@ -15,6 +15,7 @@ $(document).ready(function () {
 
     var controller = Controller(getBaseUrl());
 
+    Router.add('#/title/([a-z0-9_]+)', controller.navigateByTitle);
     Router.add('#/review/(\\d+)', controller.showReview);
     Router.add('#/category/(.*)', controller.showCategory);
     window.onhashchange = Router.update;
