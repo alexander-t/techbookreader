@@ -93,8 +93,23 @@ $app->get('/categories', function (Request $request, Response $response) {
         $categories = $this->reviewService->getCategories();
         return $response->withHeader('Content-type', 'application/json')->withJson($categories);
     } else {
-        $reviewIds = $this->reviewService->getReviewsByCategory($category);
+        $reviewIds = $this->reviewService->findReviewsByCategory($category);
         return $response->withHeader('Content-type', 'application/json')->withJson($reviewIds);
+    }
+});
+
+$app->get('/reviews', function (Request $request, Response $response) {
+    $title = $request->getParam('title');
+
+    if (!preg_match("/^([a-z0-9_]+)$/", $title)) {
+        return $response->withStatus(400);
+    }
+
+    try {
+        $review = $this->reviewService->getReviewByTitle($title);
+        return $response->withHeader('Content-type', 'application/json')->withJson($review);
+    } catch (Exception $e) {
+        return $response->withStatus(404);
     }
 });
 

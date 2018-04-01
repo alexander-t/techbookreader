@@ -15,6 +15,22 @@ class ReviewService {
         $categories = $this->pdo->query('SELECT name FROM categories')->fetchAll(PDO::FETCH_ASSOC);
         return array_map(function($r) {$r['href'] = '/categories?name=' . $r['name']; return $r;}, $categories);
     }
+
+    public function getReviewByTitle($title) {
+        $stmt = $this->pdo->prepare('SELECT ' . $this->allColumns() . ' FROM reviews WHERE canonical_title = :title');
+        $stmt->execute(['title' => $title]);
+
+        try {
+            if ($row = $stmt->fetch()) {
+                $row['is_classic'] = ($row['is_classic'] == 1) ? true : false;
+                return $row;
+            }
+
+            throw new \Exception("No review with title $title");
+        } finally {
+            $stmt->closeCursor();
+        }
+    }
     
     public function getReviewById($id) {
         $stmt = $this->pdo->prepare('SELECT ' . $this->allColumns() . ' FROM reviews WHERE id = :id');
@@ -32,7 +48,7 @@ class ReviewService {
         }
     }
 
-    public function getReviewsByCategory($category) {
+    public function findReviewsByCategory($category) {
         $reviews = [];
         if (empty($category)) {
             return $reviews;
