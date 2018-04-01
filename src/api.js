@@ -42,8 +42,13 @@ export default function (baseUrl) {
     };
 
     let navigateByTitle = function(title) {
-        $("#container").html($("#template_narrow").html());
-        $('#template_body').append(title);
+        $.getJSON(API_URL + '/title/' + title, function (review) {
+            $("#container").html($("#template_review").html());
+            $('#review_title').text(review.title);
+            $('#review_author').text('by ' + review.author);
+            $('#review_summary').html(review.summary);
+            $('#review_opinion').html(review.opinion);
+        });
     };
 
     return {
