@@ -62,6 +62,6 @@ class ReviewService {
     }
 
     private function allColumns() {
-        return "id, title, author, publication_year, summary, reviewed, opinion, is_classic";
+        return "id, title, author, image, publication_year, summary, reviewed, opinion, is_classic";
     }
 }
