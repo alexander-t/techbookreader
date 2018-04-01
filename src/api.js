@@ -23,19 +23,19 @@ export default function (baseUrl) {
     };
 
     let showReview = function (reviewId) {
-        $.getJSON(API_URL + '/reviews/' + reviewId, function (review) {
-            $("#container").html($("#template_review").html());
-	    $('#review_image').attr('src', 'images/covers/' + review.image);
-	    $('#review_title').text(review.title);
-	    $('#review_author').text('by ' + review.author);
-	    if (review.summary) {
-		$('#review_summary_section').show();
-		$('#review_summary').html(review.summary);
-	    } else {
-		$('#review_summary_section').hide();
-	    }
-            $('#review_opinion').html(review.opinion);
-        });
+        if (reviewId) {
+            $.getJSON(API_URL + '/reviews/' + reviewId, function (review) {
+                renderReview(review);
+            });
+        }
+    };
+
+    let navigateByTitle = function (title) {
+        if (title) {
+            $.getJSON(API_URL + '/reviews?title=' + title, function (review) {
+                renderReview(review);
+            });
+        }
     };
 
     let showCategory = function (category) {
@@ -47,22 +47,18 @@ export default function (baseUrl) {
         });
     };
 
-    let navigateByTitle = function (title) {
-        if (title) {
-            $.getJSON(API_URL + '/reviews?title=' + title, function (review) {
-                $("#container").html($("#template_review").html());
-		$('#review_image').attr('src', 'images/covers/' + review.image);
-                $('#review_title').text(review.title);
-                $('#review_author').text('by ' + review.author);
-                if (review.summary) {
-		    $('#review_summary_section').show();
-		    $('#review_summary').html(review.summary);
-		} else {
-		    $('#review_summary_section').hide();
-		}
-                $('#review_opinion').html(review.opinion);
-            });
+    let renderReview = function (review) {
+        $("#container").html($("#template_review").html());
+        $('#review_image').attr('src', 'images/covers/' + review.image);
+        $('#review_title').text(review.title);
+        $('#review_author').text('by ' + review.author);
+        if (review.summary) {
+            $('#review_summary_section').show();
+            $('#review_summary').html(review.summary);
+        } else {
+            $('#review_summary_section').hide();
         }
+        $('#review_opinion').html(review.opinion);
     };
 
     return {
