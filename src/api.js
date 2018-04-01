@@ -25,9 +25,15 @@ export default function (baseUrl) {
     let showReview = function (reviewId) {
         $.getJSON(API_URL + '/reviews/' + reviewId, function (review) {
             $("#container").html($("#template_review").html());
-            $('#review_title').text(review.title);
-            $('#review_author').text('by ' + review.author);
-            $('#review_summary').html(review.summary);
+	    $('#review_image').attr('src', 'images/covers/' + review.image);
+	    $('#review_title').text(review.title);
+	    $('#review_author').text('by ' + review.author);
+	    if (review.summary) {
+		$('#review_summary_section').show();
+		$('#review_summary').html(review.summary);
+	    } else {
+		$('#review_summary_section').hide();
+	    }
             $('#review_opinion').html(review.opinion);
         });
     };
@@ -45,9 +51,15 @@ export default function (baseUrl) {
         if (title) {
             $.getJSON(API_URL + '/reviews?title=' + title, function (review) {
                 $("#container").html($("#template_review").html());
+		$('#review_image').attr('src', 'images/covers/' + review.image);
                 $('#review_title').text(review.title);
                 $('#review_author').text('by ' + review.author);
-                $('#review_summary').html(review.summary);
+                if (review.summary) {
+		    $('#review_summary_section').show();
+		    $('#review_summary').html(review.summary);
+		} else {
+		    $('#review_summary_section').hide();
+		}
                 $('#review_opinion').html(review.opinion);
             });
         }
