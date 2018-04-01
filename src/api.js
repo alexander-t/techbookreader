@@ -1,4 +1,4 @@
-var reviewTemplate = require("./review.handlebars");
+const reviewTemplate = require("./review.handlebars");
 
 export default function (baseUrl) {
 
@@ -50,16 +50,16 @@ export default function (baseUrl) {
     };
 
     let renderReview = function (review) {
-	let context = {
-	    image: 'images/covers/' + review.image,
-	    title: review.title,
-	    author: review.author,
-	    opinion: review.opinion
-	};
-	if (review.summary) {
-	    context['summary'] = review.summary;
-	}
-	$("#container").html(reviewTemplate(context));
+        let context = {
+            image: 'images/covers/' + review.image,
+            title: review.title,
+            author: review.author,
+            opinion: review.opinion
+        };
+        if (review.summary) {
+            context['summary'] = review.summary;
+        }
+        $("#container").html(reviewTemplate(context));
     };
 
     return {
