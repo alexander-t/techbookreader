@@ -1,3 +1,6 @@
+RewriteEngine On
+RewriteRule ^review/([a-z0-9_]+) /#/title/$1 [QSA,NE,L,R=302]
+
 <Files config.php>
 order allow,deny
 deny from all
