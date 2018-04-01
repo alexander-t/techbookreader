@@ -24,7 +24,12 @@ module.exports = {
             },{
                 loader: 'expose-loader',
                 options: '$'
-            }]
-        }]
+            }]},
+		{ test: /\.handlebars$/, loader: "handlebars-loader" }
+               ]
+    },
+    // Workaround to make Handlebars work
+    node: {
+	fs: 'empty'
     }
 };

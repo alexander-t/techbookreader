@@ -1,3 +1,5 @@
+var reviewTemplate = require("./review.handlebars");
+
 export default function (baseUrl) {
 
     const API_URL = baseUrl + '/api';
@@ -48,17 +50,16 @@ export default function (baseUrl) {
     };
 
     let renderReview = function (review) {
-        $("#container").html($("#template_review").html());
-        $('#review_image').attr('src', 'images/covers/' + review.image);
-        $('#review_title').text(review.title);
-        $('#review_author').text('by ' + review.author);
-        if (review.summary) {
-            $('#review_summary_section').show();
-            $('#review_summary').html(review.summary);
-        } else {
-            $('#review_summary_section').hide();
-        }
-        $('#review_opinion').html(review.opinion);
+	let context = {
+	    image: 'images/covers/' + review.image,
+	    title: review.title,
+	    author: review.author,
+	    opinion: review.opinion
+	};
+	if (review.summary) {
+	    context['summary'] = review.summary;
+	}
+	$("#container").html(reviewTemplate(context));
     };
 
     return {
