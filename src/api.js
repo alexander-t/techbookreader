@@ -34,21 +34,23 @@ export default function (baseUrl) {
 
     let showCategory = function (category) {
         $.getJSON(API_URL + '/categories?name=' + category, function (reviews) {
-	    $("#container").html($("#template_narrow").html());
+            $("#container").html($("#template_narrow").html());
             for (let i = 0; i < reviews.length; i++) {
                 $('#template_body').append('<p><a href="#/review/' + reviews[i].id + '">' + reviews[i].title + '</a></p>');
             }
         });
     };
 
-    let navigateByTitle = function(title) {
-        $.getJSON(API_URL + '/title/' + title, function (review) {
-            $("#container").html($("#template_review").html());
-            $('#review_title').text(review.title);
-            $('#review_author').text('by ' + review.author);
-            $('#review_summary').html(review.summary);
-            $('#review_opinion').html(review.opinion);
-        });
+    let navigateByTitle = function (title) {
+        if (title) {
+            $.getJSON(API_URL + '/reviews?title=' + title, function (review) {
+                $("#container").html($("#template_review").html());
+                $('#review_title').text(review.title);
+                $('#review_author').text('by ' + review.author);
+                $('#review_summary').html(review.summary);
+                $('#review_opinion').html(review.opinion);
+            });
+        }
     };
 
     return {
