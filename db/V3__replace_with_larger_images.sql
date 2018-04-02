@@ -54,4 +54,7 @@ UPDATE reviews SET image = '51IsjU0PGjL._SL250_.jpg' where image like '51wjk7Q9u
 UPDATE reviews SET image = '51DIExKYQmL._SL250_.jpg' where image like '51tRL4ERCkL.%';
 UPDATE reviews SET image = '51NbiDn81NL._SL250_.jpg' where image like '51UYBHnvjFL.%';
 UPDATE reviews SET image = '51bdbO8PFgL._SL250_.jpg' where image like '51dK8xV48PL.%';
+UPDATE reviews SET image = '51waJuYVHIL._SL250_.jpg' where image like '51K1fgdKzmL.%';
+UPDATE reviews SET image = '51cjT3zs0yL._SL250_.jpg' where image like '51VI2SgJRwL.%';
+UPDATE reviews SET image = '51G5rKy7TpL._SL250_.jpg' where image like '51JByOT1xEL.%';
 
