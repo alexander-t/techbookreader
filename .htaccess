@@ -1,7 +1,12 @@
+IndexIgnore .htaccess */.??* *~ *# */HEADER* */README* */_vti*
+
 RewriteEngine On
 RewriteRule ^review/([a-z0-9_]+) /#/title/$1 [QSA,NE,L,R=302]
+
+Header add "disablevcache" "true"
 
 <Files config.php>
 order allow,deny
 deny from all
 </Files>
+
