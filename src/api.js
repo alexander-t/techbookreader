@@ -43,14 +43,22 @@ export default function (baseUrl) {
 
     let showCategory = function (category) {
         $.getJSON(API_URL + '/categories?name=' + category, function (reviews) {
-            $("#container").clear();
-            for (let i = 0; i < reviews.length; i++) {
-                if (i < 3) {
-                    let context = {title: review.title};
-                }
-                //$('#template_body').append('<p><a href="#/review/' + reviews[i].id + '">' + reviews[i].title + '</a></p>');
-            }
-            $("#container").append(reviewTemplate(context));
+	    if (reviews) {
+		let galleryHtml = '<div class="row">';
+		for (var i = 1; i <= reviews.length; i++) {
+		    let review = reviews[i - 1];
+                    let context = {title: review.title, image: 'images/covers/' + review.image};
+		    galleryHtml += bookTemplate(context);
+		    if (i % 4 === 0) {
+			galleryHtml += '</div><div class="row">';
+                    }
+		}
+		
+		if (i % 4 !== 0) {
+		    galleryHtml += '</div>';
+		}
+		$("#container").html(galleryHtml);
+	    }
         });
     };
 
