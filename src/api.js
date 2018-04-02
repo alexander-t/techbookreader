@@ -1,4 +1,5 @@
 const reviewTemplate = require("./review.handlebars");
+const bookTemplate = require("./book.handlebars");
 
 export default function (baseUrl) {
 
@@ -42,13 +43,18 @@ export default function (baseUrl) {
 
     let showCategory = function (category) {
         $.getJSON(API_URL + '/categories?name=' + category, function (reviews) {
-            $("#container").html($("#template_narrow").html());
+            $("#container").clear();
             for (let i = 0; i < reviews.length; i++) {
-                $('#template_body').append('<p><a href="#/review/' + reviews[i].id + '">' + reviews[i].title + '</a></p>');
+                if (i < 3) {
+                    let context = {title: review.title};
+                }
+                //$('#template_body').append('<p><a href="#/review/' + reviews[i].id + '">' + reviews[i].title + '</a></p>');
             }
+            $("#container").append(reviewTemplate(context));
         });
     };
 
+    // ----- PRIVATE -----
     let renderReview = function (review) {
         let context = {
             image: 'images/covers/' + review.image,
