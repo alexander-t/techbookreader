@@ -47,7 +47,9 @@ export default function (baseUrl) {
                 let galleryHtml = '<div class="row">';
                 for (var i = 1; i <= reviews.length; i++) {
                     let review = reviews[i - 1];
-                    let context = {title: review.title, image: 'images/covers/' + review.image};
+                    let context = {title: review.title,
+				   image: 'images/covers/' + review.image,
+				   reviewLink: '#/review/' + review.id};
                     galleryHtml += bookTemplate(context);
                     if (i % 4 === 0) {
                         galleryHtml += '</div><div class="row">';
