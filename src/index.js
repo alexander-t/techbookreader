@@ -15,10 +15,8 @@ function getBaseUrl() {
 
 $(document).ready(function () {
 
-    let controller = Controller(getBaseUrl());
-    Router.add('/', function () {
-        $("#container").html(aboutTemplate());
-    });
+    let controller = Controller({baseUrl: getBaseUrl(), containerSelector: '#container'});
+    Router.add('/', controller.navigateToRoot);
     Router.add('#/title/([a-z0-9_]+)', controller.navigateByTitle);
     Router.add('#/review/(\\d+)', controller.showReview);
     Router.add('#/category/(.*)', controller.showCategory);

@@ -2,9 +2,14 @@ const reviewTemplate = require("./review.handlebars");
 const bookTemplate = require("./book.handlebars");
 const menuTemplate = require("./menu.handlebars");
 
-export default function (baseUrl) {
+export default function (initParams) {
 
-    const API_URL = baseUrl + '/api';
+    const API_URL = initParams.baseUrl + '/api';
+    const CONTAINER_SELECTOR = initParams.containerSelector;
+
+    let navigateToRoot = function() {
+        $(CONTAINER_SELECTOR).html(aboutTemplate());
+    };
 
     let showMenu = function (selector) {
         $.getJSON(API_URL + '/menu', function (menus) {
@@ -32,7 +37,7 @@ export default function (baseUrl) {
         $.getJSON(API_URL + '/categories?name=' + category, function (reviews) {
             if (reviews) {
                 let galleryHtml = '<div class="row">';
-                for (var i = 1; i <= reviews.length; i++) {
+                for (let i = 1; i <= reviews.length; i++) {
                     let review = reviews[i - 1];
                     let context = {title: review.title,
 				   image: 'images/covers/' + review.image,
@@ -46,7 +51,7 @@ export default function (baseUrl) {
                 if (i % 4 !== 0) {
                     galleryHtml += '</div>';
                 }
-                $("#container").html(galleryHtml);
+                $(CONTAINER_SELECTOR).html(galleryHtml);
             }
         });
     };
@@ -62,10 +67,11 @@ export default function (baseUrl) {
         if (review.summary) {
             context['summary'] = review.summary;
         }
-        $("#container").html(reviewTemplate(context));
+        $(CONTAINER_SELECTOR).html(reviewTemplate(context));
     };
 
     return {
+        navigateToRoot: navigateToRoot,
         showMenu: showMenu,
         showReview: showReview,
         showCategory: showCategory,
