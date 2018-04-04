@@ -2,8 +2,6 @@ import 'bootstrap';
 import {Router} from './router';
 import Controller from "./api";
 
-const aboutTemplate = require('./about.handlebars');
-
 function getBaseUrl() {
     let getUrl = window.location;
     let baseUrl = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];

@@ -1,3 +1,4 @@
+const aboutTemplate = require('./about.handlebars');
 const reviewTemplate = require("./review.handlebars");
 const bookTemplate = require("./book.handlebars");
 const menuTemplate = require("./menu.handlebars");
