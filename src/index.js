@@ -1,10 +1,11 @@
 import 'bootstrap';
 import {Router} from './router';
 import Controller from "./api";
+const aboutTemplate = require('./about.handlebars');
 
 function getBaseUrl() {
-    var getUrl = window.location;
-    var baseUrl = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
+    let getUrl = window.location;
+    let baseUrl = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
     if (baseUrl.endsWith('/')) {
         baseUrl = baseUrl.substring(0, -1);
     }
@@ -13,8 +14,7 @@ function getBaseUrl() {
 
 $(document).ready(function () {
 
-    var controller = Controller(getBaseUrl());
-
+    let controller = Controller(getBaseUrl());
     Router.add('#/title/([a-z0-9_]+)', controller.navigateByTitle);
     Router.add('#/review/(\\d+)', controller.showReview);
     Router.add('#/category/(.*)', controller.showCategory);
@@ -22,4 +22,5 @@ $(document).ready(function () {
     Router.update();
 
     controller.showMenu('#book-menus');
+    $("#container").html(aboutTemplate());
 });
