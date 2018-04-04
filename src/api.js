@@ -38,7 +38,8 @@ export default function (initParams) {
         $.getJSON(API_URL + '/categories?name=' + category, function (reviews) {
             if (reviews) {
                 let galleryHtml = '<div class="row">';
-                for (let i = 1; i <= reviews.length; i++) {
+                let i;
+                for (i = 1; i <= reviews.length; i++) {
                     let review = reviews[i - 1];
                     let context = {title: review.title,
 				   image: 'images/covers/' + review.image,
