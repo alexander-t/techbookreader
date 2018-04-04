@@ -1,5 +1,6 @@
 const reviewTemplate = require("./review.handlebars");
 const bookTemplate = require("./book.handlebars");
+const menuTemplate = require("./menu.handlebars");
 
 export default function (baseUrl) {
 
@@ -7,21 +8,7 @@ export default function (baseUrl) {
 
     let showMenu = function (selector) {
         $.getJSON(API_URL + '/menu', function (menus) {
-            let menusHtml = '';
-            for (let m = 0; m < menus.length; m++) {
-                let menuHtml = '<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' + menus[m].menu + '</a><div class="dropdown-menu" aria-labelledby="navbarDropdown">';
-                for (let i = 0; i < menus[m].items.length; i++) {
-                    let item = menus[m].items[i];
-                    if (item.hasOwnProperty('item')) {
-                        menuHtml += '<a class="dropdown-item" href="#/category/' + item.category + '">' + item.item + '</a>'
-                    } else if (item.hasOwnProperty("separator")) {
-                        menuHtml += '<div class="dropdown-divider"></div>';
-                    }
-                }
-                menuHtml += '</div></li>';
-                menusHtml += menuHtml;
-            }
-            $(selector).replaceWith(menusHtml);
+            $(selector).replaceWith(menuTemplate(menus));
         });
     };
 
