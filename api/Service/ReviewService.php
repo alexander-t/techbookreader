@@ -54,7 +54,7 @@ class ReviewService {
             return $reviews;
         }
 
-        $stmt = $this->pdo->prepare('SELECT r.id, r.title, r.image FROM reviews r JOIN categories c ON c.id=r.category_id WHERE c.name = :category');
+        $stmt = $this->pdo->prepare('SELECT r.id, r.title, r.reviewed, r.image FROM reviews r JOIN categories c ON c.id=r.category_id WHERE c.name = :category');
         $stmt->execute(['category' => $category]);
         $reviews = $stmt->fetchAll(PDO::FETCH_ASSOC);
         usort($reviews, function($a, $b) {return strcmp($a['title'], $b['title']);});
