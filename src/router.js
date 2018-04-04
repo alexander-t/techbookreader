@@ -1,14 +1,15 @@
-var Router = (function () {
-    var routes = [];
+const Router = (function () {
+    let routes = [];
 
-    var add = function (route, handler) {
+    let add = function (route, handler) {
         routes.push({route: route, handler: handler});
     };
 
-    var update = function () {
-        var fragment = getFragment();
-        for (var i = 0; i < routes.length; i++) {
-            var match = fragment.match(routes[i].route + '$');
+    let update = function () {
+        let fragment = getFragment();
+
+        for (let i = 0; i < routes.length; i++) {
+            let match = fragment ? fragment.match(routes[i].route + '$') : window.location.href.match(routes[i].route + '$');
             if (match) {
                 match.shift();
                 routes[i].handler.apply({}, match);
@@ -17,8 +18,8 @@ var Router = (function () {
         }
     };
 
-    var getFragment = function () {
-        var match = window.location.href.match(/(#.*)$/);
+    let getFragment = function () {
+        let match = window.location.href.match(/(#.*)$/);
         return match ? match[1] : '';
     };
 

@@ -1,6 +1,7 @@
 import 'bootstrap';
 import {Router} from './router';
 import Controller from "./api";
+
 const aboutTemplate = require('./about.handlebars');
 
 function getBaseUrl() {
@@ -15,6 +16,9 @@ function getBaseUrl() {
 $(document).ready(function () {
 
     let controller = Controller(getBaseUrl());
+    Router.add('/', function () {
+        $("#container").html(aboutTemplate());
+    });
     Router.add('#/title/([a-z0-9_]+)', controller.navigateByTitle);
     Router.add('#/review/(\\d+)', controller.showReview);
     Router.add('#/category/(.*)', controller.showCategory);
@@ -22,5 +26,4 @@ $(document).ready(function () {
     Router.update();
 
     controller.showMenu('#book-menus');
-    $("#container").html(aboutTemplate());
 });
