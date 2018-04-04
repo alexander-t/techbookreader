@@ -1,0 +1,12 @@
+UPDATE reviews SET reviewed = replace(reviewed, ',', '');
+UPDATE reviews SET reviewed = replace(reviewed, 'read', 'Read');
+UPDATE reviews SET reviewed = 'January 2012' WHERE title LIKE 'Agile IT Security%';
+UPDATE reviews SET reviewed = 'August 2008' WHERE title LIKE 'JUnit in Action';
+UPDATE reviews SET reviewed = 'August 2008' WHERE title LIKE 'Complete Java 2 Certification Study Guide (Fifth edition)';
+UPDATE reviews SET reviewed = 'August 2008' WHERE title LIKE 'Mastering Enterprise JavaBeans, 3rd edition';
+UPDATE reviews SET reviewed = 'August 2008' WHERE title LIKE 'Beginning 3D Game Programming';
+UPDATE reviews SET reviewed = 'August 2008' WHERE title LIKE 'Building Internet Firewalls (2nd Edition)';
+UPDATE reviews SET reviewed = 'August 2008' WHERE title LIKE 'Working Effectively with Legacy Code';
+UPDATE reviews SET reviewed = 'February 2012' WHERE title LIKE 'Crystal Clear: A Human-Powered Methodology for Small Teams';
+UPDATE reviews SET reviewed = 'May 2012' WHERE title LIKE 'Seam Framework: Experience the Evolution of Java EE';
+UPDATE reviews SET reviewed = 'March 2013' WHERE title LIKE 'Bridging the Communication Gap: Specification by Example and Agile Acceptance Testing';
