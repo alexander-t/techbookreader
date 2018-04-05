@@ -8,7 +8,7 @@ export default function (initParams) {
     const API_URL = initParams.baseUrl + '/api';
     const CONTAINER_SELECTOR = initParams.containerSelector;
 
-    let navigateToRoot = function() {
+    let navigateToRoot = function () {
         $(CONTAINER_SELECTOR).html(aboutTemplate());
     };
 
@@ -34,18 +34,20 @@ export default function (initParams) {
         }
     };
 
-    let showCategory = function (category) {
-        $.getJSON(API_URL + '/categories?name=' + category, function (category) {
-	    let reviews = category.books;
+    let showCategory = function (categoryName) {
+        $.getJSON(API_URL + '/categories?name=' + categoryName, function (category) {
+            let reviews = category.books;
             if (reviews) {
                 let galleryHtml = '<h1>' + category.category + '</h1><div class="row">';
                 let i;
                 for (i = 1; i <= reviews.length; i++) {
                     let review = reviews[i - 1];
-                    let context = {title: review.title,
-				   reviewDate: new Date(review.reviewed).toLocaleString('en-us', { month: 'long', year: 'numeric' }),
-				   image: 'images/covers/' + review.image,
-				   reviewLink: '#/review/' + review.id};
+                    let context = {
+                        title: review.title,
+                        reviewDate: new Date(review.reviewed).toLocaleString('en-us', {month: 'long', year: 'numeric'}),
+                        image: 'images/covers/' + review.image,
+                        reviewLink: '#/review/' + review.id
+                    };
                     galleryHtml += bookTemplate(context);
                     if (i % 4 === 0) {
                         galleryHtml += '</div><div class="row">';
