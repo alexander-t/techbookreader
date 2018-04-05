@@ -54,11 +54,16 @@ class ReviewService {
             return $reviews;
         }
 
-        $stmt = $this->pdo->prepare('SELECT r.id, r.title, r.reviewed, r.image FROM reviews r JOIN categories c ON c.id=r.category_id WHERE c.name = :category');
+        $stmt = $this->pdo->prepare('SELECT c.label, r.id, r.title, r.reviewed, r.image FROM reviews r JOIN categories c ON c.id=r.category_id WHERE c.name = :category');
         $stmt->execute(['category' => $category]);
         $reviews = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        if (empty($reviews)) {
+            return $reviews;
+        }
+        
         usort($reviews, function($a, $b) {return strcmp($a['title'], $b['title']);});
-        return array_map(function($r) {$r['href'] = '/reviews/' . $r['id']; return $r;}, $reviews);
+        return ["category" => $reviews[0]['label'], 
+            "books" => array_map(function($r) {$r['href'] = '/reviews/' . $r['id']; return $r;}, $reviews)];
     }
 
     private function allColumns() {

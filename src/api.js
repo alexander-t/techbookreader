@@ -35,9 +35,10 @@ export default function (initParams) {
     };
 
     let showCategory = function (category) {
-        $.getJSON(API_URL + '/categories?name=' + category, function (reviews) {
+        $.getJSON(API_URL + '/categories?name=' + category, function (category) {
+	    let reviews = category.books;
             if (reviews) {
-                let galleryHtml = '<div class="row">';
+                let galleryHtml = '<h1>' + category.category + '</h1><div class="row">';
                 let i;
                 for (i = 1; i <= reviews.length; i++) {
                     let review = reviews[i - 1];
