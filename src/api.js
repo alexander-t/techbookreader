@@ -42,7 +42,7 @@ export default function (initParams) {
                 for (i = 1; i <= reviews.length; i++) {
                     let review = reviews[i - 1];
                     let context = {title: review.title,
-				   reviewDate: review.reviewed,
+				   reviewDate: new Date(review.reviewed).toLocaleString('en-us', { month: 'long', year: 'numeric' }),
 				   image: 'images/covers/' + review.image,
 				   reviewLink: '#/review/' + review.id};
                     galleryHtml += bookTemplate(context);
