@@ -13,6 +13,16 @@ function getBaseUrl() {
 
 $(document).ready(function () {
 
+    // Polyfill endsWith to keep IE happy
+    if (!String.prototype.endsWith) {
+        String.prototype.endsWith = function(search, this_len) {
+            if (this_len === undefined || this_len > this.length) {
+                this_len = this.length;
+            }
+            return this.substring(this_len - search.length, this_len) === search;
+        };
+    }
+
     let controller = Controller({baseUrl: getBaseUrl(), containerSelector: '#container'});
     Router.add('/', controller.navigateToRoot);
     Router.add('#/title/([a-z0-9_]+)', controller.navigateByTitle);
