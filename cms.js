@@ -9,8 +9,8 @@ EDITOR = (function () {
             return baseUrl;
         };
 
-    var apiUrl = getBaseUrl() + '/api';
-    var reviewId;
+        var apiUrl = getBaseUrl() + '/api';
+        var reviewId;
 
         var init = function () {
 
@@ -26,7 +26,9 @@ EDITOR = (function () {
             $('#opinion').contents().get(0).designMode = 'on';
             $('#opinion').contents().find("body").css(iFrameCss);
 
-	    $('#clear-summary-button').click(function() {$('#summary').contents().find("body").html('')});
+            $('#clear-summary-button').click(function () {
+                $('#summary').contents().find("body").html('')
+            });
         };
 
         var loadReview = function (id) {
@@ -35,7 +37,7 @@ EDITOR = (function () {
                 contentType: "application/json; charset=utf-8",
                 dataType: "json"
             }).done(function (review) {
-		reviewId = review.id;
+                reviewId = review.id;
                 displayReview(review);
                 feedbackSuccess('Load successful.');
             }).fail(function () {
@@ -45,14 +47,14 @@ EDITOR = (function () {
 
         var saveReview = function () {
             var review = {
-		id: reviewId,
+                id: reviewId,
                 title: $('#title').val().trim(),
                 author: $('#author').val().trim(),
-		publication_year: $('#publication_year').val().trim(),
-		reviewed: $('#reviewed').val().trim(),
-		is_classic: $('#is_classic').is(":checked"),
-		summary: $('#summary').contents().find("body").html().trim(),
-		opinion: $('#opinion').contents().find("body").html().trim()
+                publication_year: $('#publication_year').val().trim(),
+                reviewed: $('#reviewed').val().trim(),
+                is_classic: $('#is_classic').is(":checked"),
+                summary: $('#summary').contents().find("body").html().trim(),
+                opinion: $('#opinion').contents().find("body").html().trim()
             };
 
             $.ajax({
@@ -96,7 +98,7 @@ EDITOR = (function () {
         return {
             init: init,
             loadReview: loadReview,
-	    saveReview: saveReview
+            saveReview: saveReview
         };
     }
 )();
@@ -109,7 +111,6 @@ $(function () {
     });
 
     $('#saveButton').click(function () {
-	EDITOR.saveReview();
+        EDITOR.saveReview();
     });
-
 });
