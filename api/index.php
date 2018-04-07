@@ -8,7 +8,8 @@ require_once __DIR__ . '/../config.php';
 use PDO;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
-use TechbookReader\Service\ReviewService as ReviewService;
+use TechbookReader\Service\ReviewService;
+use TechbookReader\Service\CMSService;
 
 $CONFIG['displayErrorDetails'] = false;
 $CONFIG['addContentLengthHeader'] = false;
@@ -43,6 +44,10 @@ $container['pdo'] = function ($container) {
 
 $container['reviewService'] = function ($container) {
     return new ReviewService($container['pdo']);
+};
+
+$container['cmsService'] = function ($container) {
+    return new CMSService($container['pdo']);
 };
 
 $app->get('/ping', function (Request $request, Response $response) {
@@ -129,16 +134,16 @@ $app->get('/reviews/{id}', function (Request $request, Response $response) {
 
 $app->post('/cms', function (Request $request, Response $response) {
     $data = json_decode($request->getBody(), true);
-    if (empty($data['title']) || empty($data['author'])) {
+    if (empty($data['id']) || empty($data['title']) || empty($data['author']) || empty($data['publication_year']) || empty($data['reviewed']) || empty($data['opinion'])) {
         return $response->withStatus(400);
     }
 
-    $summary = $data['summary'];
-    error_log($summary);
-
-    $response = $response->withHeader('Content-type', 'application/json');
-    $response = $response->withJson(["status" => $data['title']])->withStatus(200);
-    return $response;
+    try {
+        $this->cmsService->saveReview($data);
+        return $response->withHeader('Content-type', 'application/json')->withJson(['success' => $data['title']]);
+    } catch (Exception $e) {
+        return $response->withStatus(404);
+    }
 });
 
 $app->run();
