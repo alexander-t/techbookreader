@@ -1,16 +1,16 @@
 EDITOR = (function () {
 
-        // TODO: Remove once consolidated
         var getBaseUrl = function () {
             var getUrl = window.location;
-            var baseUrl = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
+            var baseUrl = getUrl.protocol + "//" + getUrl.host;
             if (baseUrl.endsWith('/')) {
                 baseUrl = baseUrl.substring(0, -1);
             }
             return baseUrl;
         };
 
-        var apiUrl = getBaseUrl();
+    var apiUrl = getBaseUrl() + '/api';
+    var reviewId;
 
         var init = function () {
 
@@ -25,7 +25,8 @@ EDITOR = (function () {
 
             $('#opinion').contents().get(0).designMode = 'on';
             $('#opinion').contents().find("body").css(iFrameCss);
-            console.log(getBaseUrl());
+
+	    $('#clear-summary-button').click(function() {$('#summary').contents().find("body").html('')});
         };
 
         var loadReview = function (id) {
@@ -34,6 +35,7 @@ EDITOR = (function () {
                 contentType: "application/json; charset=utf-8",
                 dataType: "json"
             }).done(function (review) {
+		reviewId = review.id;
                 displayReview(review);
                 feedbackSuccess('Load successful.');
             }).fail(function () {
@@ -43,14 +45,18 @@ EDITOR = (function () {
 
         var saveReview = function () {
             var review = {
-                title: $('#title').val(),
-                author: $('#author').val(),
-                //summary: EDITOR.summaryFrame.body.innerHTML.trim().replace(/(["])/g, "\\$1"),
-                //opinion: EDITOR.opinionFrame.body.innerHTML.trim().replace(/(["])/g, "\\$1")
+		id: reviewId,
+                title: $('#title').val().trim(),
+                author: $('#author').val().trim(),
+		publication_year: $('#publication_year').val().trim(),
+		reviewed: $('#reviewed').val().trim(),
+		is_classic: $('#is_classic').is(":checked"),
+		summary: $('#summary').contents().find("body").html().trim(),
+		opinion: $('#opinion').contents().find("body").html().trim()
             };
 
             $.ajax({
-                url: EDITOR.apiUrl + '/cms',
+                url: apiUrl + '/cms',
                 method: 'POST',
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
@@ -89,7 +95,8 @@ EDITOR = (function () {
 
         return {
             init: init,
-            loadReview: loadReview
+            loadReview: loadReview,
+	    saveReview: saveReview
         };
     }
 )();
@@ -102,26 +109,7 @@ $(function () {
     });
 
     $('#saveButton').click(function () {
-        var review = {
-            title: $('#title').val(),
-            author: $('#author').val(),
-            summary: EDITOR.summaryFrame.body.innerHTML.trim().replace(/(["])/g, "\\$1"),
-            opinion: EDITOR.opinionFrame.body.innerHTML.trim().replace(/(["])/g, "\\$1")
-        };
-
-        $.ajax({
-            url: EDITOR.apiUrl + 'cms',
-            method: 'POST',
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            data: JSON.stringify(review)
-        })
-            .done(function (data) {
-                feedbackSuccess('Save successful.');
-            })
-            .fail(function () {
-                feedbackError('Save failed!');
-            });
+	EDITOR.saveReview();
     });
 
 });
