@@ -22,12 +22,13 @@ class CMSService
                     'reviewed' => $review['reviewed'],
                     'is_classic' => $review['is_classic'] == true ? 1 : 0,
                     'opinion' => $review['opinion'],
-                'summary' => $review['summary'],
-                'canonical_title' => $this->canonicalize($review['title'])
+                    'summary' => $review['summary'],
+                    'canonical_title' => $this->canonicalize($review['title'])
                 ]);
     }
 
-    private function canonicalize($s) {
+    private function canonicalize($s)
+    {
         $r = trim(strtolower($s));
         $r = preg_replace("/\s+/", "_", $r);
         return preg_replace("/[^a-z0-9_]/", "", $r);

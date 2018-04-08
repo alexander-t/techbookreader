@@ -8,8 +8,8 @@ require_once __DIR__ . '/../config.php';
 use PDO;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
-use TechbookReader\Service\ReviewService;
 use TechbookReader\Service\CMSService;
+use TechbookReader\Service\ReviewService;
 
 $CONFIG['displayErrorDetails'] = false;
 $CONFIG['addContentLengthHeader'] = false;
@@ -148,11 +148,12 @@ $app->post('/cms', function (Request $request, Response $response) {
 
 $app->run();
 
-function isReviewDataComplete($data) {
+function isReviewDataComplete($data)
+{
     return !(empty($data['id']) ||
-    empty($data['title']) ||
-    empty($data['author']) ||
-    empty($data['publication_year']) ||
-    empty($data['reviewed']) ||
-    empty($data['opinion']));
+        empty($data['title']) ||
+        empty($data['author']) ||
+        empty($data['publication_year']) ||
+        empty($data['reviewed']) ||
+        empty($data['opinion']));
 }
