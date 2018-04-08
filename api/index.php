@@ -134,7 +134,7 @@ $app->get('/reviews/{id}', function (Request $request, Response $response) {
 
 $app->post('/cms', function (Request $request, Response $response) {
     $data = json_decode($request->getBody(), true);
-    if (empty($data['id']) || empty($data['title']) || empty($data['author']) || empty($data['publication_year']) || empty($data['reviewed']) || empty($data['opinion'])) {
+    if (!isReviewDataComplete($data)) {
         return $response->withStatus(400);
     }
 
@@ -147,3 +147,12 @@ $app->post('/cms', function (Request $request, Response $response) {
 });
 
 $app->run();
+
+function isReviewDataComplete($data) {
+    return !(empty($data['id']) ||
+    empty($data['title']) ||
+    empty($data['author']) ||
+    empty($data['publication_year']) ||
+    empty($data['reviewed']) ||
+    empty($data['opinion']));
+}
